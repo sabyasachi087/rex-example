@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 05-add-remarks-to-order-master
+      author: sabyasachi
+      changes:
+        - addColumn:
+            tableName: order_master
+            columns:
+              - column:
+                  name: remarks
+                  type: VARCHAR(255)

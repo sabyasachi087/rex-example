@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: 03-create-user-product-cart-table
+      author: sabyasachi
+      changes:
+        - createTable:
+            tableName: user_product_cart
+            columns:
+              - column:
+                  name: cart_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_product_cart_user
+                    references: users(user_id)
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_product_cart_product
+                    references: products(id)
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_on
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP

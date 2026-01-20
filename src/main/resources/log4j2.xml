@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" monitorInterval="0">
+    <Properties>
+        <Property name="log-level">warn</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="file"
+                     fileName="${sys:log.path}/rest-exchange.log"
+                     filePattern="${sys:log.path}/rest-exchange-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout
+                    pattern="[${hostName}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{traceId}/%X{spanId}] [%t] %-5level %logger{36} - %c{1}: %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="4" />
+        </RollingFile>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="[${hostName}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%X{traceId}/%X{spanId}] [%t] %-5level %logger{36} - %c{1}: %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <logger name="com.sroyc" level="INFO" />
+        <Root level="${log-level}">
+            <!-- <AppenderRef ref="file" /> -->
+            <AppenderRef ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
